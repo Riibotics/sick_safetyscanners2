@@ -90,8 +90,8 @@ SickSafetyscannersLifeCycle::on_activate(const rclcpp_lifecycle::State &) {
   m_extended_laser_scan_publisher->on_activate();
   m_output_paths_publisher->on_activate();
   m_raw_data_publisher->on_activate();
-
   rii_common_utils::DiagnosticUpdaterBuilder diagnostic_updater_builder(this);
+  m_last_scan_time = std::chrono::steady_clock::now();
   m_diagnostic_updater = diagnostic_updater_builder.SetPeriodInSec(1.0)
                             .SetHardwareID("sick_safetyscanner")
                             .EnableStatusUpdate()
